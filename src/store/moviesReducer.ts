@@ -4,17 +4,29 @@ import { rootMovies } from './store';
 export const moviesApi = createApi({
     reducerPath: 'moviesApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=1&genres=1&order=RATING&type=FILM&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&page=1',
+        baseUrl: 'https://kinopoiskapiunofficial.tech/api/v2.2/films',
     }),
     endpoints: (builder) => ({
-        getMovies: builder.query<rootMovies, void>({
-            query: () => ({
+        getMovies: builder.query<rootMovies, {type: string}>({
+            query: ({type}) => ({
                 url: '',
                 method: 'GET',
                 headers: {
                 'X-API-KEY': 'e90cfcea-db6a-4efc-8436-577ca4a173d0',
                 'Content-Type': 'application/json',
                 },
+                params: {
+                    type: type,
+                    order: 'NUM_VOTE',
+                    ratingFrom: 0,
+                    ratingTo: 10,
+                    yearFrom: 1000,
+                    yearTo: 3000,
+                    page: 1,
+                    country: 1,
+                    genre: 1,
+                    keyword: '',
+                }
             })
         })
     }),

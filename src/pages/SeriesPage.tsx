@@ -1,26 +1,26 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import MoviesList from '../components/MoviesList';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { addFilms } from '../store/movieSlice';
+import { useAppSelector } from '../hooks/redux';
+import { addSeries } from '../store/movieSlice';
 import { useGetMoviesQuery } from '../store/moviesReducer';
 
-const MoviesPage:React.FC = () => {
-    const {isError, isLoading, data} = useGetMoviesQuery({type: 'FILM'});
-    const {movies} = useAppSelector((state) => state.movie);
+const SeriesPage:React.FC = () => {
+    const {isError, isLoading, data} = useGetMoviesQuery({type: 'TV_SERIES'});
+    const {series} = useAppSelector((state) => state.movie);
     const dispatch = useDispatch();
     
     useEffect(() => {
         if(data?.items && data?.items.length > 0){
-            dispatch(addFilms(data.items));
+            dispatch(addSeries(data.items));
         }
     }, [data]);
 
     return (
         <div className='container mx-auto px-3'>
-            {movies && <MoviesList movies={movies}/>}
+            {series && <MoviesList movies={series}/>}
         </div>
     );
 };
 
-export default MoviesPage;
+export default SeriesPage;

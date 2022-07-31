@@ -32,9 +32,15 @@ export interface rootMovies {
     items: IMovie[];
 }
 
-export const store = configureStore({
-    reducer: {
-        [moviesApi.reducerPath]: moviesApi.reducer, 
-        [moviesSlice.name]: moviesSlice.reducer,
-    },
+const rootReducer = combineReducers({
+    [moviesApi.reducerPath]: moviesApi.reducer, 
+    [moviesSlice.name]: moviesSlice.reducer,
 });
+
+export const store = configureStore({
+    reducer: rootReducer,
+});
+
+export type RootState = ReturnType<typeof rootReducer>;
+export type TAppStore = ReturnType<typeof configureStore>;
+export type TAppDispatch = TAppStore['dispatch'];
