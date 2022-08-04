@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import Loader from '../components/Loader';
 import MoviesList from '../components/MoviesList';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { addFilms } from '../store/movieSlice';
@@ -18,6 +19,7 @@ const MoviesPage:React.FC = () => {
 
     return (
         <div className='container mx-auto px-3'>
+            <Loader/>
             {movies && <MoviesList movies={movies}/>}
         </div>
     );
