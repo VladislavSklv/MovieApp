@@ -19,10 +19,10 @@ const TvShowsPage = () => {
 
     return (
         <div className='container mx-auto px-3 pb-4'>
+            {tvShows && <MoviesList movies={tvShows}/>}
             {isLoading && <Loader/>}
             {isError && <ErrorBlock/>}
-            {tvShows && <MoviesList movies={tvShows}/>}
-            <MyButton setPage={setPage} />
+            {tvShows && <MyButton setPage={setPage} />}
         </div>
     );
 };

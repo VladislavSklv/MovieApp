@@ -19,10 +19,10 @@ const SeriesPage:React.FC = () => {
 
     return (
         <div className='container mx-auto px-3 pb-4'>
+            {series && <MoviesList movies={series}/> }
             {isLoading && <Loader/>}
             {isError && <ErrorBlock/>}
-            {series && <MoviesList movies={series}/>}
-            <MyButton setPage={setPage} />
+            {series && <MyButton setPage={setPage} />}
         </div>
     );
 };
