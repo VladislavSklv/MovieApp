@@ -7,8 +7,8 @@ export const moviesApi = createApi({
         baseUrl: 'https://kinopoiskapiunofficial.tech/api/v2.2/films',
     }),
     endpoints: (builder) => ({
-        getMovies: builder.query<rootMovies, {type: string}>({
-            query: ({type}) => ({
+        getMovies: builder.query<rootMovies, { type: string, page: number }>({
+            query: ({type = 'FILM', page = 1}) => ({
                 url: '',
                 method: 'GET',
                 headers: {
@@ -22,7 +22,7 @@ export const moviesApi = createApi({
                     ratingTo: 10,
                     yearFrom: 1000,
                     yearTo: 3000,
-                    page: 1,
+                    page: page,
                     country: 1,
                     genre: 1,
                     keyword: '',

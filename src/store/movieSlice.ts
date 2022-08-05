@@ -1,7 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, Slice } from "@reduxjs/toolkit";
 import { IMovie } from "./store";
 
-export const moviesSlice = createSlice({
+export const moviesSlice: Slice<{
+        movies: IMovie[] | any;
+        series: IMovie[] | any;
+        tvShows: IMovie[] | any;
+    }, {
+        addFilms(state: any, action: {
+            type: string;
+            payload: IMovie[];
+        }): void;
+        addSeries(state: any, action: {
+            type: string;
+            payload: IMovie[];
+        }): void;
+        addTvShows(state: any, action: {
+            type: string;
+            payload: IMovie[];
+        }): void;
+    }, "movie"> = createSlice({
     name: 'movie',
     initialState: {
         movies: [],

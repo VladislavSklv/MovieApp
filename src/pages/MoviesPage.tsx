@@ -1,26 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import ErrorBlock from '../components/ErrorBlock';
 import Loader from '../components/Loader';
 import MoviesList from '../components/MoviesList';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { useAppSelector } from '../hooks/redux';
+import useFilms from '../hooks/useFilms';
 import { addFilms } from '../store/movieSlice';
 import { useGetMoviesQuery } from '../store/moviesReducer';
+import MyButton from '../UI/MyButton';
 
 const MoviesPage:React.FC = () => {
-    const {isError, isLoading, data} = useGetMoviesQuery({type: 'FILM'});
     const {movies} = useAppSelector((state) => state.movie);
     const dispatch = useDispatch();
+    const [page, setPage] = useState(1);
+    const {isError, isLoading, data} = useGetMoviesQuery({type: 'FILM', page});
     
-    useEffect(() => {
-        if(data?.items && data?.items.length > 0){
-            dispatch(addFilms(data.items));
-        }
-    }, [data]);
+
+    useFilms(data, movies, dispatch, addFilms);
 
     return (
-        <div className='container mx-auto px-3'>
-            <Loader/>
+        <div className='container mx-auto px-3 pb-4'>
             {movies && <MoviesList movies={movies}/>}
+            {isLoading && <Loader/>}
+            {isError && <ErrorBlock/>}
+            <MyButton setPage={setPage} />
         </div>
     );
 };
