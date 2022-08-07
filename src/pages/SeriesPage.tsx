@@ -13,7 +13,7 @@ const SeriesPage:React.FC = () => {
     const [page, setPage] = useState(1);
     const {series} = useAppSelector((state) => state.movie);
     const dispatch = useDispatch();
-    const {isError, isLoading, data} = useGetMoviesQuery({type: 'TV_SERIES', page});
+    const {isError, isLoading, data} = useGetMoviesQuery({type: 'TV_SERIES', page, query: '', order: 'NUM_VOTE'});
     
     useFilms(data, series, dispatch, addSeries);
 
@@ -22,7 +22,12 @@ const SeriesPage:React.FC = () => {
             {series && <MoviesList movies={series}/> }
             {isLoading && <Loader/>}
             {isError && <ErrorBlock/>}
-            {series && <MyButton setPage={setPage} />}
+            {!isLoading && !isError && 
+                <div className='flex'>
+                    <MyButton onClickHandler={() => setPage(prev => prev - 1)}>Назад</MyButton>
+                    <MyButton onClickHandler={() => setPage(prev => prev + 1)}>Вперёд</MyButton>
+                </div>
+            }
         </div>
     );
 };

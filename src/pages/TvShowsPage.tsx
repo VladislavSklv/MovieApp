@@ -13,7 +13,7 @@ const TvShowsPage = () => {
     const [page, setPage] = useState(1);
     const {tvShows} = useAppSelector((state) => state.movie);
     const dispatch = useDispatch();
-    const {isError, isLoading, data} = useGetMoviesQuery({type: 'TV_SHOW', page});
+    const {isError, isLoading, data} = useGetMoviesQuery({type: 'TV_SHOW', page, query: '', order: 'NUM_VOTE'});
 
     useFilms(data, tvShows, dispatch, addTvShows);
 
@@ -22,7 +22,12 @@ const TvShowsPage = () => {
             {tvShows && <MoviesList movies={tvShows}/>}
             {isLoading && <Loader/>}
             {isError && <ErrorBlock/>}
-            {tvShows && <MyButton setPage={setPage} />}
+            {!isLoading && !isError && 
+                <div className='flex'>
+                    <MyButton onClickHandler={() => setPage(prev => prev - 1)}>Назад</MyButton>
+                    <MyButton onClickHandler={() => setPage(prev => prev + 1)}>Вперёд</MyButton>
+                </div>
+            }
         </div>
     );
 };

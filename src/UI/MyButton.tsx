@@ -1,17 +1,19 @@
-import React from 'react';
-
+import React, { ReactNode } from 'react';
 interface myButtonProps {
-    setPage: React.Dispatch<React.SetStateAction<number>>;
+    onClickHandler: () => void;
+    children: ReactNode;
+    disabled?: boolean;
 }
 
-const MyButton: React.FC<myButtonProps> = ({setPage}: myButtonProps) => {
+const MyButton: React.FC<myButtonProps> = ({onClickHandler, children, disabled}: myButtonProps) => {
     return (
         <div className='text-center'>
             <button 
-                className='inline-block border-black border-2 rounded uppercase text-sm transition-all px-[20px] py-[10px]'
-                onClick={() => {setPage(prev => prev + 1)}}
+                className='inline-block border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[24px]'
+                onClick={onClickHandler}
+                disabled={disabled}
                 >
-                Показать больше
+                {children}
             </button>
         </div>
     );
