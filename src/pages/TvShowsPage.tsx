@@ -13,7 +13,7 @@ const TvShowsPage = () => {
     const [page, setPage] = useState(1);
     const {tvShows} = useAppSelector((state) => state.movie);
     const dispatch = useDispatch();
-    const {isError, isLoading, data} = useGetMoviesQuery({type: 'TV_SHOW', page, query: '', order: 'NUM_VOTE'});
+    const {isError, isLoading, data} = useGetMoviesQuery({type: 'TV_SHOW', page, query: '', order: 'NUM_VOTE', minRate: 0, maxRate: 10, minYear: 1000, maxYear: 3000});
 
     useFilms(data, tvShows, dispatch, addTvShows);
 

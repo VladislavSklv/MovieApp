@@ -1,14 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { rootMovies } from './store';
 
+interface getMoviesProps {
+    type: string; 
+    page: number;
+    query: string; 
+    order: string;
+    minRate: number;
+    maxRate: number;
+    minYear: number;
+    maxYear: number;
+}
+
 export const moviesApi = createApi({
     reducerPath: 'moviesApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://kinopoiskapiunofficial.tech/api/v2.2/films',
     }),
     endpoints: (builder) => ({
-        getMovies: builder.query<rootMovies, { type: string, page: number, query: string, order: string }>({
-            query: ({type = 'FILM', page = 1, query = '', order = 'NUM_VOTE'}) => ({
+        getMovies: builder.query<rootMovies, getMoviesProps>({
+            query: ({type = 'FILM', page = 1, query = '', order = 'NUM_VOTE', minRate = 0, maxRate = 10, minYear = 1000, maxYear = 3000}) => ({
                 url: '',
                 method: 'GET',
                 headers: {
@@ -18,10 +29,10 @@ export const moviesApi = createApi({
                 params: {
                     type: type,
                     order: order,
-                    ratingFrom: 0,
-                    ratingTo: 10,
-                    yearFrom: 1000,
-                    yearTo: 3000,
+                    ratingFrom: minRate,
+                    ratingTo: maxRate,
+                    yearFrom: minYear,
+                    yearTo: maxYear,
                     page: page,
                     country: 1,
                     genre: 1,
