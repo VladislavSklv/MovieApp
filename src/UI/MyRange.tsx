@@ -81,7 +81,7 @@ const MyRange: React.FC<myRangeProps> = ({setPage, setMinRange, setMaxRange, min
                 }}
                 className="thumb z-[4]"
             />
-            <div className="relative w-[200px]">
+            <div className="relative w-[300px]">
                 <div className="slider__track rounded h-[5px] absolute z-[1] bg-gray-200 w-[100%]" />
                 <div ref={range} className="slider__range" />
                 <div className="slider__left-value text-[12px] mt-[20px] absolute left-[6px]">от {minRange}</div>

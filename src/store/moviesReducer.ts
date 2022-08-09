@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { rootMovies } from './store';
+import { RootGentresAndCountries, rootMovies } from './store';
 
 interface getMoviesProps {
     type: string; 
@@ -10,6 +10,8 @@ interface getMoviesProps {
     maxRate: number;
     minYear: number;
     maxYear: number;
+    genre?: string;
+    country?: string;
 }
 
 export const moviesApi = createApi({
@@ -19,7 +21,7 @@ export const moviesApi = createApi({
     }),
     endpoints: (builder) => ({
         getMovies: builder.query<rootMovies, getMoviesProps>({
-            query: ({type = 'FILM', page = 1, query = '', order = 'NUM_VOTE', minRate = 0, maxRate = 10, minYear = 1000, maxYear = 3000}) => ({
+            query: ({type = 'FILM', page = 1, query = '', order = 'NUM_VOTE', minRate = 0, maxRate = 10, minYear = 1000, maxYear = 3000, genre, country}) => ({
                 url: '',
                 method: 'GET',
                 headers: {
@@ -34,9 +36,19 @@ export const moviesApi = createApi({
                     yearFrom: minYear,
                     yearTo: maxYear,
                     page: page,
-                    country: 1,
-                    genre: 1,
+                    genres: genre,
+                    countries: country,
                     keyword: query,
+                }
+            })
+        }),
+        getGenresAndCountries: builder.query<RootGentresAndCountries, void>({
+            query: () => ({
+                url: '/filters',
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': 'e90cfcea-db6a-4efc-8436-577ca4a173d0',
+                    'Content-Type': 'application/json',
                 }
             })
         })
@@ -44,4 +56,4 @@ export const moviesApi = createApi({
 });
 
 export default moviesApi;
-export const { useGetMoviesQuery } = moviesApi;
+export const { useGetMoviesQuery, useLazyGetMoviesQuery, useLazyGetGenresAndCountriesQuery } = moviesApi;

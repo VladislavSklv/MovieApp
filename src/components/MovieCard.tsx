@@ -16,7 +16,7 @@ const MovieCard:React.FC<MovieCardProps> = ({movie}) => {
         >
             <div className='w-[100%] h-[276px]'><img className='w-[100%] h-[100%] rounded-t' src={movie.posterUrlPreview} alt="poster" /></div>
             <div className='rounded-b shadow-outset px-[7px] pb-[3px]'>
-                <h2 className='font-mono font-bold text-[18px]'>{movie.nameRu}</h2>
+                <h2 className='font-mono font-bold text-[18px]'>{movie.nameRu || movie.nameOriginal}</h2>
                 {/* {movie.genres.map((genre) => (
                     <h2 className='font-mono' key={movie.kinopoiskId + genre.genre}>{genre.genre}</h2>
                 ))} */}

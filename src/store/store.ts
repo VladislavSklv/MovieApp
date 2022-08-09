@@ -10,6 +10,21 @@ interface IGenre {
     genre: string;
 }
 
+export interface Genre {
+    id: number;
+    genre: string;
+}
+
+export interface Country {
+    id: number;
+    country: string;
+}
+
+export interface RootGentresAndCountries {
+    genres: Genre[];
+    countries: Country[];
+}
+
 export interface IMovie {
     kinopoiskId: number;
     imdbId: string;

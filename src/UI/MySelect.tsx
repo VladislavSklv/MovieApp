@@ -1,8 +1,12 @@
 import React from 'react';
+import { Country, Genre } from '../store/store';
 
 export interface selectOption {
-    text: string;
-    value: string;
+    text?: string;
+    value?: string;
+    id?: number;
+    genre?: string;
+    country?: string;
 }
 
 interface mySelectProps {
@@ -29,7 +33,7 @@ const MySelect: React.FC<mySelectProps> = ({label, options, selectedOption, setP
             >
                 <option value='selected' disabled>{selectedOption}</option>
                 {options.map(option => (
-                    <option key={option.value} value={option.value} >{option.text}</option> 
+                    <option key={option.value || option.id} value={option.value || option.id?.toString()} >{option.text || option.genre || option.country}</option> 
                 ))}
             </select>
         </>
