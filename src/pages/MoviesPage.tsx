@@ -18,23 +18,24 @@ const MoviesPage:React.FC = () => {
     const [country, setCountry] = useState('');
     const [fetchMovies, {isError: isMoviesError, isFetching: isMoviesFetching, isLoading: isMoviesLoading, data: movies} ] = useLazyGetMoviesQuery();
 
-    const dependecies = {type: 'FILM', page, query, order: select, minRate, maxRate, minYear, maxYear, genre, country}
-
-    useEffect(() => {
-        fetchMovies(dependecies);
-    }, []);
+    const dependecies = {type: 'FILM', page, query, order: select, minRate, maxRate, minYear, maxYear, genre, country};
 
     const onClickHandler = () => {
         fetchMovies(dependecies);
     };
 
+    useEffect(() => {
+        fetchMovies(dependecies);
+    }, []);
+
     return (
         <div className='container mx-auto px-3 pb-4'>
             <Filters maxRate={maxRate} maxYear={maxYear} minRate={minRate} minYear={minYear} onClickHandler={onClickHandler} query={query} setMaxRate={setMaxRate} setMaxYear={setMaxYear} setMinRate={setMinRate} setMinYear={setMinYear} setPage={setPage} setQuery={setQuery} setSelect={setSelect} setGenre={setGenre} setCountry={setCountry}/>
-            {isMoviesLoading || isMoviesFetching && <Loader/>}
+            {(isMoviesLoading || isMoviesFetching) && <Loader/>}
             {isMoviesError && <ErrorBlock/>}
-            {movies && movies !== undefined && <MoviesList movies={movies?.items}/>}
-            {!isMoviesError && movies !== undefined && movies &&
+            {(movies && movies !== undefined && movies.total > 0) && <MoviesList movies={movies?.items}/>}
+            {movies?.total === 0 && <div className='text-[32px] text-center font-bold'>Фильмы не найдены</div>}
+            {!isMoviesError && movies !== undefined && movies.total > 0 &&
                 <div className='flex justify-center mx-auto'>
                     <MyButton 
                         onClickHandler={() => {window.scrollTo(0, 0); setPage(prev => prev - 1); fetchMovies(dependecies)}} 
