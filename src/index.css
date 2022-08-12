@@ -10,7 +10,7 @@
     animation: rightleft 3s linear infinite;
 }
 .loader__circle{
-    animation: blackwhite 2s linear infinite;
+    animation: updownwithbg 2s linear infinite;
 }
 .loader__circle:nth-child(2){
     animation-delay: 300ms;
@@ -73,6 +73,63 @@
     position: relative;
 }
 
+.coverImg::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 1;
+}
+
+.shadow-inset{
+    -webkit-box-shadow: inset 0px 3px 4px 0px rgba(0, 0, 0, .7);
+    -moz-box-shadow: inset 0px 3px 4px 0px rgba(0, 0, 0, .7);
+    -ms-box-shadow: inset 0px 3px 4px 0px rgba(0, 0, 0, .7);
+    -o-box-shadow: inset 0px 3px 4px 0px rgba(0, 0, 0, .7);
+    box-shadow: inset 0px 3px 4px 0px rgba(0, 0, 0, .7);
+}
+
+.table-vote:hover ~ .tables {
+    opacity: 1;
+}
+
+.tables::before{
+    content: ' ';
+    position: absolute; 
+	width: 0; 
+	height: 0; 
+	left: 4px; 
+	bottom: -8px; 
+	border: 8px solid;
+    border-color: grey transparent transparent grey; 
+}
+
+.slick-dots--10 .slick-slide { 
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 210px;
+    padding: 0 5px; 
+}
+
+.slick-dots{
+    bottom: -67px;
+}
+
+.slick-arrow::before, .slick-dots li.slick-active button::before{
+    color: #E58B1E;
+    --tw-ring-offset-color: #E58B1E;
+    --tw-ring-color: rgb(59 130 246 / 0.5);
+    --tw-ring-offset-shadow: 0 0 #E58B1E;
+    --tw-ring-shadow: 0 0 #E58B1E;
+    --tw-shadow: 0 0 #E58B1E;
+    --tw-shadow-colored: 0 0 #E58B1E;
+}
+
 @keyframes blackwhite {
     0%{
         background-color: rgba(0, 0, 0, 1);
@@ -106,5 +163,26 @@
     }
     100%{
         transform: translateX(-80%);
+    }
+}
+
+@keyframes updownwithbg {
+    0%{
+        transform: translateY(0);
+        background-color: rgba(223, 135, 29, 1);
+    }
+    25%{
+        transform: translateY(60%);
+    }
+    50%{
+        transform: translateY(0);
+        background-color: rgba(223, 135, 29, .4);  
+    }
+    75%{
+        transform: translateY(-60%);
+    }
+    100%{
+        transform: translateY(0);
+        background-color: rgba(223, 135, 29, 1);
     }
 }

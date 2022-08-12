@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import ErrorBlock from '../components/ErrorBlock';
 import Filters from '../components/Filters';
 import Loader from '../components/Loader';
 import MoviesList from '../components/MoviesList';
-import { useAppSelector } from '../hooks/redux';
-import useFilms from '../hooks/useFilms';
-import { addTvShows } from '../store/movieSlice';
-import { useGetMoviesQuery, useLazyGetMoviesQuery } from '../store/moviesReducer';
+import { useLazyGetMoviesQuery } from '../store/moviesReducer';
 import MyButton from '../UI/MyButton';
 
 const TvShowsPage = () => {

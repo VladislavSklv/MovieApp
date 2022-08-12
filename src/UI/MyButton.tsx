@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes, ReactNode } from 'react';
 type myButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-    onClickHandler: () => void,
+    onClickHandler?: () => void,
     children: ReactNode,
 }
 

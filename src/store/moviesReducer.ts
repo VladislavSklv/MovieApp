@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { RootGentresAndCountries, rootMovies } from './store';
+import { MovieById, RootComments, RootGentresAndCountries, rootMovies, RootShots, RootSimilars, RootTrailer } from './store';
 
 interface getMoviesProps {
     type: string; 
@@ -12,6 +12,10 @@ interface getMoviesProps {
     maxYear: number;
     genre?: string;
     country?: string;
+}
+
+interface getMovieByIdProps {
+    kinopoiskId: string | undefined;
 }
 
 export const moviesApi = createApi({
@@ -51,9 +55,64 @@ export const moviesApi = createApi({
                     'Content-Type': 'application/json',
                 }
             })
-        })
+        }),
+        getMovieById: builder.query<MovieById, getMovieByIdProps>({
+            query: ({kinopoiskId}) => ({
+                url: `/${kinopoiskId}`,
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': 'e90cfcea-db6a-4efc-8436-577ca4a173d0',
+                    'Content-Type': 'application/json',
+                },
+            })
+        }),
+        getTrailerById: builder.query<RootTrailer, getMovieByIdProps>({
+            query: ({kinopoiskId}) => ({
+                url: `/${kinopoiskId}/videos`,
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': 'e90cfcea-db6a-4efc-8436-577ca4a173d0',
+                    'Content-Type': 'application/json',
+                },
+            })
+        }),
+        getShotsById: builder.query<RootShots, getMovieByIdProps>({
+            query: ({kinopoiskId}) => ({
+                url: `/${kinopoiskId}/images`,
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': 'e90cfcea-db6a-4efc-8436-577ca4a173d0',
+                    'Content-Type': 'application/json',
+                },
+                params: {
+                    id: kinopoiskId,
+                    type: 'STILL',
+                    page: 1,
+                }
+            })
+        }),
+        getSimilarsById: builder.query<RootSimilars, getMovieByIdProps>({
+            query: ({kinopoiskId}) => ({
+                url: `/${kinopoiskId}/similars`,
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': 'e90cfcea-db6a-4efc-8436-577ca4a173d0',
+                    'Content-Type': 'application/json',
+                }
+            })
+        }),
+        getReviewsById: builder.query<RootComments, getMovieByIdProps>({
+            query: ({kinopoiskId}) => ({
+                url: `/${kinopoiskId}/reviews`,
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': 'e90cfcea-db6a-4efc-8436-577ca4a173d0',
+                    'Content-Type': 'application/json',
+                }
+            })
+        }),
     }),
 });
 
 export default moviesApi;
-export const { useGetMoviesQuery, useLazyGetMoviesQuery, useLazyGetGenresAndCountriesQuery } = moviesApi;
+export const { useLazyGetMoviesQuery, useLazyGetGenresAndCountriesQuery, useGetMovieByIdQuery, useGetTrailerByIdQuery, useGetShotsByIdQuery, useGetSimilarsByIdQuery } = moviesApi;
