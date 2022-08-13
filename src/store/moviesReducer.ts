@@ -18,6 +18,11 @@ interface getMovieByIdProps {
     kinopoiskId: string | undefined;
 }
 
+interface getReviewsByIdProps {
+    kinopoiskId: string | undefined;
+    page: number;
+}
+
 export const moviesApi = createApi({
     reducerPath: 'moviesApi',
     baseQuery: fetchBaseQuery({
@@ -101,13 +106,18 @@ export const moviesApi = createApi({
                 }
             })
         }),
-        getReviewsById: builder.query<RootComments, getMovieByIdProps>({
-            query: ({kinopoiskId}) => ({
+        getReviewsById: builder.query<RootComments, getReviewsByIdProps>({
+            query: ({kinopoiskId, page}) => ({
                 url: `/${kinopoiskId}/reviews`,
                 method: 'GET',
                 headers: {
                     'X-API-KEY': 'e90cfcea-db6a-4efc-8436-577ca4a173d0',
                     'Content-Type': 'application/json',
+                },
+                params:{
+                    id: kinopoiskId,
+                    page: page,
+                    order: 'DATE_DESC',
                 }
             })
         }),
@@ -115,4 +125,4 @@ export const moviesApi = createApi({
 });
 
 export default moviesApi;
-export const { useLazyGetMoviesQuery, useLazyGetGenresAndCountriesQuery, useGetMovieByIdQuery, useGetTrailerByIdQuery, useGetShotsByIdQuery, useGetSimilarsByIdQuery } = moviesApi;
+export const { useLazyGetMoviesQuery, useLazyGetGenresAndCountriesQuery, useGetMovieByIdQuery, useGetTrailerByIdQuery, useGetShotsByIdQuery, useGetSimilarsByIdQuery, useGetReviewsByIdQuery } = moviesApi;

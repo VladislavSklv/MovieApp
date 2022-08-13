@@ -42,6 +42,9 @@ const TvShowsPage = () => {
                         disabled={page === 1 && true}
                         className='inline-block border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[24px]'
                     >&#8592;</MyButton>
+                    <div className='text-[#E58B1E] text-[32px] mx-[5px] grow-0 shrink-0 leading-[1.1]'>
+                        {page}
+                    </div>
                     <MyButton 
                         onClickHandler={() => {window.scrollTo(0, 0); setPage(prev => prev + 1); fetchTvShows(dependecies)}} 
                         disabled={tvShows?.items.length < 20 && true}

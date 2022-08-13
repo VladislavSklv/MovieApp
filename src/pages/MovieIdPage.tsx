@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ErrorBlock from '../components/ErrorBlock';
 import Loader from '../components/Loader';
-import { useGetMovieByIdQuery, useGetShotsByIdQuery, useGetSimilarsByIdQuery, useGetTrailerByIdQuery } from '../store/moviesReducer';
+import { useGetMovieByIdQuery, useGetReviewsByIdQuery, useGetShotsByIdQuery, useGetSimilarsByIdQuery, useGetTrailerByIdQuery } from '../store/moviesReducer';
 import Slider from 'react-slick';
 import MyArrow from '../UI/MyArrow';
+import SimilarsBlock from '../components/SimilarsBlock';
+import Review from '../components/Review';
+import MyButton from '../UI/MyButton';
 
 interface movieIdPageProps {
     urlPath: string
@@ -12,12 +15,12 @@ interface movieIdPageProps {
 
 const MovieIdPage:React.FC<movieIdPageProps> = ({urlPath}) => {
     const { kinopoiskId } = useParams();
+    const [page, setPage] = useState(1);
     const { isLoading, isError, data } = useGetMovieByIdQuery({kinopoiskId});
     const { data: trailers } = useGetTrailerByIdQuery({kinopoiskId});
     const {data: shots} = useGetShotsByIdQuery({kinopoiskId});
     const {data: similars} = useGetSimilarsByIdQuery({kinopoiskId});
-
-    const navigate = useNavigate();
+    const {data: reviews} = useGetReviewsByIdQuery({kinopoiskId, page});
 
     const settings = {
         dots: true,
@@ -42,34 +45,6 @@ const MovieIdPage:React.FC<movieIdPageProps> = ({urlPath}) => {
         prevArrow: <MyArrow/>,
         nextArrow: <MyArrow/>,
         adaptiveHeight: true,
-    };
-
-    const SimilarSettings = {
-        dots: true,
-        infinite: true,
-        variableWidth: true,
-        centerMode: true,
-        adaptiveHeight: true,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        prevArrow: <MyArrow/>,
-        nextArrow: <MyArrow/>,
-        responsive: [
-            {
-              breakpoint: 1280,
-              settings: {
-                slidesToShow: 3,
-              }
-            },
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 1,
-                dots: false
-              }
-            }
-          ]
     };
     
     return (
@@ -139,24 +114,38 @@ const MovieIdPage:React.FC<movieIdPageProps> = ({urlPath}) => {
                         </div>
                     </div>
                     {(similars !== undefined && similars?.items.length > 0) && 
-                        <div className='slick-dots--10 bg-white relative shadow-inset py-[20px] mb-[10vh] text-[22px] font-mono'>
-                            <h2 className='text-center text-[32px] font-bold'>Похожие фильмы</h2>
-                            <Slider className='w-[210px] mx-auto mb-[70px] md:w-[630px] xl:w-[1050px] ' {...SimilarSettings}>
-                                {similars?.items.map(similar => (
-                                    <div
-                                        key={similar.posterUrl}
-                                        className='relative w-[200px] min-h-[276px] rounded mx-[5px] my-[30px] shadow-md cursor-pointer transition-all hover:scale-[103%] shrink-0 grow-0' 
-                                        onClick={() => {window.scrollTo(0, 0); navigate(`/${urlPath}/${similar.filmId}`,{replace: false})}}
-                                    >
-                                        <div className='w-[100%] h-[276px]'><img className='w-[100%] h-[100%] rounded-t' src={similar.posterUrlPreview} alt="poster" /></div>
-                                        <div className='rounded-b shadow-outset px-[7px] pb-[3px]'>
-                                            <h2 className='font-mono font-bold text-[18px]'>{similar.nameRu || similar.nameOriginal}</h2>
-                                        </div>
-                                    </div>
-                                ))}
-                            </Slider>
+                        <div className='slick-dots--10 bg-white relative shadow-inset py-[20px] mb-[15vh] text-[22px] font-mono'>
+                            <SimilarsBlock similars={similars} urlPath={urlPath} title='Похожие фильмы' />
                         </div>
                     }
+                    {(reviews && reviews.total > 0) && 
+                        <div id='reviews' className='bg-white relative shadow-inset py-[20px] mb-[10vh] text-[22px] font-mono'>
+                            <h2 className='text-center text-[32px] font-bold mb-[30px]'>Рецензии зрителей</h2>
+                            <div className='container mx-auto px-6 pb-4'>
+                                {reviews.items.map(review => (
+                                    <Review review={review}/>
+                                ))}
+                            </div>
+                            <div className='flex justify-center'>
+                                <a onClick={e => page === 1 ? e.preventDefault() : console.log()} className={page === 1 ? 'cursor-default' : 'cursor-pointer'} href="#reviews">
+                                    <MyButton 
+                                        onClickHandler={() => {setPage(prev => prev - 1)}} 
+                                        disabled={page === 1 && true}
+                                        className='inline-block border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[24px]'
+                                    >&#8592;</MyButton>
+                                </a>
+                                <div className='text-[#E58B1E] text-[32px] mx-[5px] grow-0 shrink-0 leading-[1.1]'>
+                                    {page}
+                                </div>
+                                <a className={reviews?.items.length < 20 ? 'cursor-default' : 'cursor-pointer'} href="#reviews">
+                                    <MyButton 
+                                        onClickHandler={() => {setPage(prev => prev + 1)}} 
+                                        disabled={reviews?.items.length < 20 && true}
+                                        className='inline-block border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[24px]'
+                                    >&#8594;</MyButton>
+                                </a>
+                            </div>
+                        </div>}
                 </div>
             }
         </>

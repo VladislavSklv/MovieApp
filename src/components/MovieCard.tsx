@@ -21,11 +21,11 @@ const MovieCard:React.FC<MovieCardProps> = ({movie}) => {
             </div>
             <div className='flex absolute right-2 top-0 translate-y-[-50%] z-2'>
                 <div className='relative'>
-                    <h2 className='flex items-center justify-center px-[10px] py-[4px] rounded bg-[#E58B1E] text-white mx-0.5 min-w-[40px] table-vote'>{movie.ratingKinopoisk}</h2>
+                    <h2 className='flex items-center justify-center px-[10px] py-[4px] rounded bg-[#E58B1E] text-white mx-0.5 min-w-[40px] table-vote'>{movie.ratingKinopoisk || 'N'}</h2>
                     <div className='absolute top-[-40px] left-[15px] transition-opacity block bg-[grey] px-[6px] py-[4px] rounded text-white tables opacity-0 pointer-events-none whitespace-nowrap'>рейтинг Kinopoisk</div>
                 </div>
                 <div className='relative'>
-                    <h2 className='flex items-center justify-center px-[10px] py-[4px] rounded bg-[#F5C518] text-white mx-0.5 min-w-[40px] table-vote'>{movie.ratingImdb}</h2>
+                    <h2 className='flex items-center justify-center px-[10px] py-[4px] rounded bg-[#F5C518] text-white mx-0.5 min-w-[40px] table-vote'>{movie.ratingImdb || 'N'}</h2>
                     <div className='absolute top-[-40px] left-[15px] transition-opacity block bg-[grey] px-[6px] py-[4px] rounded text-white tables opacity-0 pointer-events-none whitespace-nowrap'>рейтинг IMDB</div>
                 </div>
             </div>

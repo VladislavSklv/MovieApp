@@ -41,12 +41,15 @@ const SeriesPage:React.FC = () => {
                     <MyButton 
                         onClickHandler={() => {window.scrollTo(0, 0); setPage(prev => prev - 1); fetchSeries(dependecies)}} 
                         disabled={page === 1 && true}
-                        className='inline-block border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[24px]'
+                        className='inline-block grow-0 srink-0 border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[24px]'
                     >&#8592;</MyButton>
+                    <div className='text-[#E58B1E] text-[32px] mx-[5px] grow-0 shrink-0 leading-[1.1]'>
+                        {page}
+                    </div>
                     <MyButton 
                         onClickHandler={() => {window.scrollTo(0, 0); setPage(prev => prev + 1); fetchSeries(dependecies)}} 
                         disabled={series?.items.length < 20 && true}
-                        className='inline-block border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[24px]'
+                        className='inline-block grow-0 srink-0 border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[24px]'
                     >&#8594;</MyButton>
                 </div>
             }

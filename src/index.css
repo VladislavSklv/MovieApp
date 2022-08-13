@@ -7,16 +7,16 @@
 }
 
 .loader{
-    animation: rightleft 3s linear infinite;
+    animation: rightleft 2s linear infinite;
 }
 .loader__circle{
     animation: updownwithbg 2s linear infinite;
 }
 .loader__circle:nth-child(2){
-    animation-delay: 300ms;
+    animation-delay: 500ms;
 }
 .loader__circle:nth-child(3){
-    animation-delay: 600ms;
+    animation-delay: 1000ms;
 }
 
 .thumb,
@@ -146,19 +146,13 @@
     0%{
         transform: translateX(-80%);
     }
-    22%{
-        transform: translateX(0);
-    }
-    28%{
+    25%{
         transform: translateX(0);
     }
     50%{
         transform: translateX(80%);
     }
-    72%{
-        transform: translateX(0);
-    }
-    78%{
+    75%{
         transform: translateX(0);
     }
     100%{
@@ -172,14 +166,14 @@
         background-color: rgba(223, 135, 29, 1);
     }
     25%{
-        transform: translateY(60%);
+        transform: translateY(150%);
     }
     50%{
         transform: translateY(0);
         background-color: rgba(223, 135, 29, .4);  
     }
     75%{
-        transform: translateY(-60%);
+        transform: translateY(-150%);
     }
     100%{
         transform: translateY(0);
