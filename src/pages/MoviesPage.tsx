@@ -36,24 +36,24 @@ const MoviesPage:React.FC = () => {
             {(movies && movies !== undefined && movies.total > 0) && <MoviesList movies={movies?.items}/>}
             {movies?.total === 0 && <div className='text-[32px] text-center font-bold'>Фильмы не найдены</div>}
             {!isMoviesError && movies !== undefined && movies.total > 0 &&
-                <div className='flex justify-center mx-auto'>
-                    <div className='inline-block toOrangeBg rounded'>
+                <div className='flex justify-center'>
+                    <a className='inline-block toOrangeBg rounded'>
                         <MyButton 
                             onClickHandler={() => {window.scrollTo(0, 0); setPage(prev => prev - 1); fetchMovies(dependecies)}} 
                             disabled={page === 1 && true}
-                            className='toWhiteText inline-block border-black border-2 rounded uppercase text-sm px-[10px] pt-[5px] pb-[6px] text-[24px]'
+                            className='toWhiteText font-mono inline-block border-black border-2 rounded uppercase text-sm px-[10px] pt-[5px] pb-[6px] text-[24px]'
                         >&#8592;</MyButton>
-                    </div>
+                    </a>
                     <div className='text-[#E58B1E] text-[32px] mx-[5px] grow-0 shrink-0 leading-[1.1]'>
                         {page}
                     </div>
-                    <div className='inline-block toOrangeBg rounded'>
+                    <a className='inline-block toOrangeBg rounded'>
                         <MyButton 
                             onClickHandler={() => {window.scrollTo(0, 0); setPage(prev => prev + 1); fetchMovies(dependecies)}} 
                             disabled={movies?.items.length < 20 && true}
-                            className='toWhiteText inline-block border-black border-2 rounded uppercase text-sm px-[10px] pt-[5px] pb-[6px] text-[24px]'
+                            className='toWhiteText font-mono inline-block border-black border-2 rounded uppercase text-sm px-[10px] pt-[5px] pb-[6px] text-[24px]'
                         >&#8594;</MyButton>
-                    </div>
+                    </a>
                 </div>
             }
         </div>

@@ -7,16 +7,38 @@
 }
 
 .loader{
-    animation: rightleft 2s linear infinite;
+    animation: rightlefts 2s linear infinite;
 }
 .loader__circle{
-    animation: updownwithbg 2s linear infinite;
+    animation: rotatingwithbg 3s linear infinite;
+    transform-origin: -10px -10px;
+}
+.loader__circle:first-child{
+    animation-delay: 300ms;
 }
 .loader__circle:nth-child(2){
-    animation-delay: 500ms;
+    animation-delay: 600ms;
 }
 .loader__circle:nth-child(3){
-    animation-delay: 1000ms;
+    animation-delay: 900ms;
+}
+.loader__circle:nth-child(4){
+    animation-delay: 1200ms;
+}
+.loader__circle:nth-child(5){
+    animation-delay: 1500ms;
+}
+.loader__circle:nth-child(6){
+    animation-delay: 1800ms;
+}
+.loader__circle:nth-child(7){
+    animation-delay: 2100ms;
+}
+.loader__circle:nth-child(8){
+    animation-delay: 2400ms;
+}
+.loader__circle:nth-child(9){
+    animation-delay: 2700ms;
 }
 
 .thumb,
@@ -151,6 +173,35 @@
     background-position: 0 100%;
 }
 
+.toOrangeBgLeft{
+    background: linear-gradient(to right, white, white 50%, #E58B1E 50%);  
+    background-size: 200% 100%;
+    background-position: 0 100%;
+    transition: all 275ms ease;
+}
+
+.toWhiteTextLeft {
+    background: linear-gradient(to right, black, black 50%, white 50%);  
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 0 100%;
+    transition: all 275ms ease;
+}
+
+.toOrangeBgLeft:hover {
+    background-position: 100%;
+}
+
+.toOrangeBgLeft:hover > button{
+    border-color: transparent;
+}
+
+.toOrangeBgLeft:hover > .toWhiteTextLeft{
+    background-position: 100%;
+}
+
 .slick-dots--10 .slick-slide { 
     display: flex;
     justify-content: center;
@@ -171,6 +222,21 @@
     --tw-ring-shadow: 0 0 #E58B1E;
     --tw-shadow: 0 0 #E58B1E;
     --tw-shadow-colored: 0 0 #E58B1E;
+}
+
+.listDisc:hover::before{
+    background-color: #E58B1E;
+}
+
+.listDisc::before{
+    content: '';
+    display: inline-block;
+    margin: 0 5px 3px;
+    height: 5px;
+    width: 5px;
+    background-color: black;
+    border-radius: 100%;
+    transition: all 0.1s;
 }
 
 @keyframes blackwhite {
@@ -203,23 +269,17 @@
     }
 }
 
-@keyframes updownwithbg {
+@keyframes rotatingwithbg {
     0%{
-        transform: translateY(0);
+        transform: rotate(0);
         background-color: rgba(223, 135, 29, 1);
     }
-    25%{
-        transform: translateY(150%);
-    }
     50%{
-        transform: translateY(0);
+        transform: rotate(180deg);
         background-color: rgba(223, 135, 29, .4);  
     }
-    75%{
-        transform: translateY(-150%);
-    }
     100%{
-        transform: translateY(0);
+        transform: rotate(360deg);
         background-color: rgba(223, 135, 29, 1);
     }
 }

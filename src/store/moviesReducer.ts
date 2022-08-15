@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { MovieById, RootComments, RootGentresAndCountries, rootMovies, RootShots, RootSimilars, RootTrailer } from './store';
+import { MovieById, RootComments, RootFacts, RootGentresAndCountries, rootMovies, RootShots, RootSimilars, RootTrailer } from './store';
 
 interface getMoviesProps {
     type: string; 
@@ -121,8 +121,18 @@ export const moviesApi = createApi({
                 }
             })
         }),
+        getFactsById: builder.query<RootFacts, getMovieByIdProps>({
+            query: ({kinopoiskId}) => ({
+                url: `/${kinopoiskId}/facts`,
+                method: 'GET',
+                headers: {
+                    'X-API-KEY': 'e90cfcea-db6a-4efc-8436-577ca4a173d0',
+                    'Content-Type': 'application/json',
+                }
+            })
+        }),
     }),
 });
 
 export default moviesApi;
-export const { useLazyGetMoviesQuery, useLazyGetGenresAndCountriesQuery, useGetMovieByIdQuery, useGetTrailerByIdQuery, useGetShotsByIdQuery, useGetSimilarsByIdQuery, useGetReviewsByIdQuery } = moviesApi;
+export const { useLazyGetMoviesQuery, useLazyGetGenresAndCountriesQuery, useGetMovieByIdQuery, useGetTrailerByIdQuery, useGetShotsByIdQuery, useGetSimilarsByIdQuery, useGetReviewsByIdQuery, useGetFactsByIdQuery } = moviesApi;

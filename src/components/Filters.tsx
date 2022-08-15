@@ -51,7 +51,7 @@ const Filters: React.FC<filtersProps> = ({onClickHandler, maxRate, minRate, setM
             <MySelect label='Сортировать' selectedOption='Выберите порядок' options={options} setPage={setPage} setSelect={setSelect}/>
             {filters != undefined && <MySelect selectedOption='Выберите жанр' options={filters?.genres} setPage={setPage} setSelect={setGenre} />}
             {filters != undefined && <MySelect selectedOption='Выберите страну' options={filters?.countries} setPage={setPage} setSelect={setCountry} />}
-            <div className='flex justify-between flex-wrap'>
+            <div className='flex sm:justify-between justify-center flex-wrap'>
                 <MyRange setPage={setPage} setMinRange={setMinRate} setMaxRange={setMaxRate} minRange={minRate} maxRange={maxRate} min={0} max={10} label='Выберите оценку' />
                 <MyRange setPage={setPage} setMinRange={setMinYear} setMaxRange={setMaxYear} minRange={minYear} maxRange={maxYear} min={1000} max={3000} label='Выберите год' />
             </div>

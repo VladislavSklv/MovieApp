@@ -8,9 +8,10 @@ const Navbar:React.FC = () => {
                 <div className="flex items-center justify-between">
                     <Link to='/' className='toOrangeText font-bold text-xl hover:scale-110 hover:mx-1'>MovieApp</Link>
                     <ul className='flex'>
-                        <NavLink to='/movies' className='toOrangeText mx-0.5 hover:scale-125 hover:mx-4 hover:text-[#E58B1E]'>Movies</NavLink>
+                        <NavLink to='/movies' className='toOrangeText mx-0.5 hover:scale-125 hover:mx-4'>Movies</NavLink>
                         <NavLink to='/series' className='toOrangeText mx-0.5 hover:scale-125 hover:mx-4'>Series</NavLink>
                         <NavLink to='/tvshows' className='toOrangeText mx-0.5 hover:scale-125 hover:mx-4'>TV Shows</NavLink>
+                        <NavLink to='/about' className='toOrangeText mx-0.5 hover:scale-125 hover:mx-4'>About</NavLink>
                     </ul>
                 </div>
             </div>

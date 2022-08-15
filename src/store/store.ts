@@ -151,6 +151,17 @@ export interface RootComments {
     items: IComment[];
 }
 
+export interface RootFacts {
+    total: number;
+    items: IFact[];
+}
+  
+export interface IFact {
+    text: string;
+    type: string;
+    spoiler: boolean;
+}
+
 const rootReducer = combineReducers({
     [moviesApi.reducerPath]: moviesApi.reducer, 
     [moviesSlice.name]: moviesSlice.reducer,

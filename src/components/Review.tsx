@@ -1,4 +1,4 @@
-import React, { AnchorHTMLAttributes, useRef } from 'react';
+import React, {  useRef } from 'react';
 import { IComment } from '../store/store';
 
 interface reviewProps {
@@ -12,7 +12,7 @@ const Review:React.FC<reviewProps> = ({review}) => {
         <div id={review.date.toString()} key={review.date.toString()} className='border-y-[1px] border-gray px-[20px] py-[15px] mb-[30px]'>
             <h2 className='text-[22px] font-bold'>{review.title}</h2>
             <div className='text-[18px] text-black/60 my-3'>{review.author}</div>
-            <div ref={ref} className='text-[20px] whitespace-pre-wrap h-[115px] mb-[10px] overflow-hidden'>{review.description}</div>
+            <div ref={ref} className='text-[20px] whitespace-pre-wrap h-[115px] mb-[10px] overflow-hidden'>{review.description.replace(/&#\d*;/g, '')}</div>
             <a 
                 href={`#${review.date.toString()}`}
                 className='cursor-pointer text-[16px] underline text-black/70'

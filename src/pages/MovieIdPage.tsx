@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ErrorBlock from '../components/ErrorBlock';
 import Loader from '../components/Loader';
-import { useGetMovieByIdQuery, useGetReviewsByIdQuery, useGetShotsByIdQuery, useGetSimilarsByIdQuery, useGetTrailerByIdQuery } from '../store/moviesReducer';
+import { useGetFactsByIdQuery, useGetMovieByIdQuery, useGetReviewsByIdQuery, useGetShotsByIdQuery, useGetSimilarsByIdQuery, useGetTrailerByIdQuery } from '../store/moviesReducer';
 import Slider from 'react-slick';
 import MyArrow from '../UI/MyArrow';
 import SimilarsBlock from '../components/SimilarsBlock';
 import Review from '../components/Review';
 import MyButton from '../UI/MyButton';
+import Fact from '../components/Fact';
 
 interface movieIdPageProps {
     urlPath: string
@@ -21,6 +22,7 @@ const MovieIdPage:React.FC<movieIdPageProps> = ({urlPath}) => {
     const {data: shots} = useGetShotsByIdQuery({kinopoiskId});
     const {data: similars} = useGetSimilarsByIdQuery({kinopoiskId});
     const {data: reviews} = useGetReviewsByIdQuery({kinopoiskId, page});
+    const {data: facts} = useGetFactsByIdQuery({kinopoiskId});
 
     const settings = {
         dots: true,
@@ -45,6 +47,17 @@ const MovieIdPage:React.FC<movieIdPageProps> = ({urlPath}) => {
         prevArrow: <MyArrow/>,
         nextArrow: <MyArrow/>,
         adaptiveHeight: true,
+    };
+
+    const FactsSettings = {
+        dots: true,
+        infinite: true,
+        adaptiveHeight: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        prevArrow: <MyArrow/>,
+        nextArrow: <MyArrow/>,
     };
     
     return (
@@ -113,8 +126,18 @@ const MovieIdPage:React.FC<movieIdPageProps> = ({urlPath}) => {
                             </div>
                         </div>
                     </div>
+                    {(facts !== undefined && facts.total > 0) &&
+                        <div className='bg-white relative shadow-inset pt-[20px] pb-[80px] mb-[25vh] text-[22px] font-mono'>
+                            <h2 className='text-center text-[32px] font-bold mb-[30px]'>Этого вы точно не знали</h2>
+                            <Slider className='w-[300px] md:w-[680px] mx-[auto]' {...FactsSettings}>
+                                {facts.items.map(fact => (
+                                    <Fact key={fact.text} fact={fact} />
+                                ))}
+                            </Slider>
+                        </div>
+                    }
                     {(similars !== undefined && similars?.items.length > 0) && 
-                        <div className='slick-dots--10 bg-white relative shadow-inset py-[20px] mb-[15vh] text-[22px] font-mono'>
+                        <div className='slick-dots--10 bg-white relative shadow-inset pt-[20px] pb-[15px] mb-[15vh] text-[22px] font-mono'>
                             <SimilarsBlock similars={similars} urlPath={urlPath} title='Похожие фильмы' />
                         </div>
                     }
@@ -127,21 +150,21 @@ const MovieIdPage:React.FC<movieIdPageProps> = ({urlPath}) => {
                                 ))}
                             </div>
                             <div className='flex justify-center'>
-                                <a onClick={e => page === 1 ? e.preventDefault() : console.log()} className={page === 1 ? 'cursor-default' : 'cursor-pointer'} href="#reviews">
+                                <a onClick={e => page === 1 ? e.preventDefault() : console.log()} className={page === 1 ? 'cursor-default' : 'cursor-pointer inline-block toOrangeBgLeft rounded'} href="#reviews">
                                     <MyButton 
                                         onClickHandler={() => {setPage(prev => prev - 1)}} 
                                         disabled={page === 1 && true}
-                                        className='inline-block border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[24px]'
+                                        className='toWhiteTextLeft inline-block border-black border-2 rounded uppercase text-sm px-[10px] pt-[5px] pb-[6px] text-[24px]'
                                     >&#8592;</MyButton>
                                 </a>
                                 <div className='text-[#E58B1E] text-[32px] mx-[5px] grow-0 shrink-0 leading-[1.1]'>
                                     {page}
                                 </div>
-                                <a className={reviews?.items.length < 20 ? 'cursor-default' : 'cursor-pointer'} href="#reviews">
+                                <a className={reviews?.items.length < 20 ? 'cursor-default' : 'cursor-pointer inline-block toOrangeBg rounded'} href="#reviews">
                                     <MyButton 
                                         onClickHandler={() => {setPage(prev => prev + 1)}} 
                                         disabled={reviews?.items.length < 20 && true}
-                                        className='inline-block border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[24px]'
+                                        className='toWhiteText inline-block border-black border-2 rounded uppercase text-sm px-[10px] pt-[5px] pb-[6px] text-[24px]'
                                     >&#8594;</MyButton>
                                 </a>
                             </div>
