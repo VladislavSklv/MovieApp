@@ -10,7 +10,7 @@ export interface selectOption {
 }
 
 interface mySelectProps {
-    label: string;
+    label?: string;
     selectedOption: string;
     options: selectOption[];
     setSelect: React.Dispatch<React.SetStateAction<string>>;
@@ -20,7 +20,7 @@ interface mySelectProps {
 const MySelect: React.FC<mySelectProps> = ({label, options, selectedOption, setPage, setSelect}) => {
     return (
         <>
-            <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{label}</label>
+            <label htmlFor="countries" className="block mt-1 mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{label}</label>
             <select 
                 defaultValue='selected' 
                 id="countries" 

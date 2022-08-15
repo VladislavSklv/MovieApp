@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .active {
-    text-decoration: underline;
+    border-bottom: 1px black solid;
 }
 
 .loader{
@@ -106,6 +106,49 @@
 	bottom: -8px; 
 	border: 8px solid;
     border-color: grey transparent transparent grey; 
+    z-index: -1;
+}
+
+.toOrangeText{
+    background: linear-gradient(to right, #E58B1E, #E58B1E 50%, black 50%);  
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: all 275ms ease;
+}
+.toOrangeText:hover {
+    background-position: 0 100%;
+    border-color: #E58B1E;
+}
+
+.toOrangeBg{
+    background: linear-gradient(to right, #E58B1E, #E58B1E 50%, white 50%);  
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: all 275ms ease;
+}
+
+.toWhiteText {
+    background: linear-gradient(to right, white, white 50%, black 50%);  
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: all 275ms ease;
+}
+.toOrangeBg:hover {
+    background-position: 0 100%;
+}
+
+.toOrangeBg:hover > button{
+    border-color: transparent;
+}
+
+.toOrangeBg:hover > .toWhiteText{
+    background-position: 0 100%;
 }
 
 .slick-dots--10 .slick-slide { 

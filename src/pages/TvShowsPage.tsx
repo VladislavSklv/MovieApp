@@ -37,19 +37,23 @@ const TvShowsPage = () => {
             {tvShows?.total === 0 && <div className='text-[32px] text-center font-bold'>Шоу не найдены</div>}
             {!isTvShowsError && tvShows !== undefined && tvShows.total > 0 &&
                 <div className='flex justify-center mx-auto'>
-                    <MyButton 
-                        onClickHandler={() => {window.scrollTo(0, 0); setPage(prev => prev - 1); fetchTvShows(dependecies)}} 
-                        disabled={page === 1 && true}
-                        className='inline-block border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[24px]'
-                    >&#8592;</MyButton>
+                    <div className='inline-block toOrangeBg rounded'>
+                        <MyButton 
+                            onClickHandler={() => {window.scrollTo(0, 0); setPage(prev => prev - 1); fetchTvShows(dependecies)}} 
+                            disabled={page === 1 && true}
+                            className='toWhiteText inline-block border-black border-2 rounded uppercase text-sm px-[10px] pt-[5px] pb-[6px] text-[24px]'
+                        >&#8592;</MyButton>
+                    </div>
                     <div className='text-[#E58B1E] text-[32px] mx-[5px] grow-0 shrink-0 leading-[1.1]'>
                         {page}
                     </div>
-                    <MyButton 
-                        onClickHandler={() => {window.scrollTo(0, 0); setPage(prev => prev + 1); fetchTvShows(dependecies)}} 
-                        disabled={tvShows?.items.length < 20 && true}
-                        className='inline-block border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[24px]'
-                    >&#8594;</MyButton>
+                    <div className='inline-block toOrangeBg rounded'>
+                        <MyButton 
+                            onClickHandler={() => {window.scrollTo(0, 0); setPage(prev => prev + 1); fetchTvShows(dependecies)}} 
+                            disabled={tvShows?.items.length < 20 && true}
+                            className='toWhiteText inline-block border-black border-2 rounded uppercase text-sm px-[10px] pt-[5px] pb-[6px] text-[24px]'
+                        >&#8594;</MyButton>
+                    </div>
                 </div>
             }
         </div>

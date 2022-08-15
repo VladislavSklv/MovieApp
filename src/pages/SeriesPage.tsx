@@ -38,19 +38,23 @@ const SeriesPage:React.FC = () => {
             {series?.total === 0 && <div className='text-[32px] text-center font-bold'>Сериалы не найдены</div>}
             {!isSeriesError && series !== undefined && series.total > 0 &&
                 <div className='flex justify-center mx-auto'>
-                    <MyButton 
-                        onClickHandler={() => {window.scrollTo(0, 0); setPage(prev => prev - 1); fetchSeries(dependecies)}} 
-                        disabled={page === 1 && true}
-                        className='inline-block grow-0 srink-0 border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[24px]'
-                    >&#8592;</MyButton>
+                    <div className='inline-block toOrangeBg rounded'>
+                        <MyButton 
+                            onClickHandler={() => {window.scrollTo(0, 0); setPage(prev => prev - 1); fetchSeries(dependecies)}} 
+                            disabled={page === 1 && true}
+                            className='toWhiteText inline-block border-black border-2 rounded uppercase text-sm px-[10px] pt-[5px] pb-[6px] text-[24px]'
+                        >&#8592;</MyButton>
+                    </div>
                     <div className='text-[#E58B1E] text-[32px] mx-[5px] grow-0 shrink-0 leading-[1.1]'>
                         {page}
                     </div>
-                    <MyButton 
-                        onClickHandler={() => {window.scrollTo(0, 0); setPage(prev => prev + 1); fetchSeries(dependecies)}} 
-                        disabled={series?.items.length < 20 && true}
-                        className='inline-block grow-0 srink-0 border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[24px]'
-                    >&#8594;</MyButton>
+                    <div className='inline-block toOrangeBg rounded'>
+                        <MyButton 
+                            onClickHandler={() => {window.scrollTo(0, 0); setPage(prev => prev + 1); fetchSeries(dependecies)}} 
+                            disabled={series?.items.length < 20 && true}
+                            className='toWhiteText inline-block border-black border-2 rounded uppercase text-sm px-[10px] pt-[5px] pb-[6px] text-[24px]'
+                        >&#8594;</MyButton>
+                    </div>
                 </div>
             }
         </div>

@@ -47,19 +47,23 @@ const Filters: React.FC<filtersProps> = ({onClickHandler, maxRate, minRate, setM
 
     return (
         <form className='mb-[30px]'>
-            <MySearch setPage={setPage} setQuery={setQuery} query={query} />
+            <MySearch label='Поиск по названию' setPage={setPage} setQuery={setQuery} query={query} />
             <MySelect label='Сортировать' selectedOption='Выберите порядок' options={options} setPage={setPage} setSelect={setSelect}/>
-            {filters != undefined && <MySelect label='Сортировать' selectedOption='Выберите жанр' options={filters?.genres} setPage={setPage} setSelect={setGenre} />}
-            {filters != undefined && <MySelect label='Сортировать' selectedOption='Выберите страну' options={filters?.countries} setPage={setPage} setSelect={setCountry} />}
+            {filters != undefined && <MySelect selectedOption='Выберите жанр' options={filters?.genres} setPage={setPage} setSelect={setGenre} />}
+            {filters != undefined && <MySelect selectedOption='Выберите страну' options={filters?.countries} setPage={setPage} setSelect={setCountry} />}
             <div className='flex justify-between flex-wrap'>
                 <MyRange setPage={setPage} setMinRange={setMinRate} setMaxRange={setMaxRate} minRange={minRate} maxRange={maxRate} min={0} max={10} label='Выберите оценку' />
                 <MyRange setPage={setPage} setMinRange={setMinYear} setMaxRange={setMaxYear} minRange={minYear} maxRange={maxYear} min={1000} max={3000} label='Выберите год' />
             </div>
-            <MyButton 
-                onClickHandler={onClickHandler} 
-                className='inline-block border-black border-2 rounded uppercase text-sm transition-all px-[10px] py-[5px] text-[16px]'
-                type='button'
-            >Fetch</MyButton>
+            <div className='text-center'>
+                <div className='toOrangeBg inline-block mx-[auto] w-[auto] rounded mt-[30px]'>
+                    <MyButton 
+                        onClickHandler={onClickHandler} 
+                        className='toWhiteText inline-block border-black border-2 rounded uppercase text-sm px-[10px] py-[5px] text-[16px]'
+                        type='button'
+                    >Применить</MyButton>
+                </div>
+            </div>
         </form>
     );
 };

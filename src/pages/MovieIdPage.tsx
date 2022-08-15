@@ -119,7 +119,7 @@ const MovieIdPage:React.FC<movieIdPageProps> = ({urlPath}) => {
                         </div>
                     }
                     {(reviews && reviews.total > 0) && 
-                        <div id='reviews' className='bg-white relative shadow-inset py-[20px] mb-[10vh] text-[22px] font-mono'>
+                        <div id='reviews' className='bg-white relative shadow-inset py-[20px] text-[22px] font-mono'>
                             <h2 className='text-center text-[32px] font-bold mb-[30px]'>Рецензии зрителей</h2>
                             <div className='container mx-auto px-6 pb-4'>
                                 {reviews.items.map(review => (
